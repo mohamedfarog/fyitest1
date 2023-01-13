@@ -1,4 +1,4 @@
-# FYI based qml program to load and run vedio 
+# FYI based qml program to load and play vedio 
 
 - Ensure same compiler is installed
 - Use CMakeList.txt to Debug and run the project
