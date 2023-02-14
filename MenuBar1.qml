@@ -1,41 +1,43 @@
 
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.Layouts
 import QtMultimedia
+import QtQuick.Controls.Fusion as FyiTest
 
 Item {
     id: root
     required property MediaPlayer mediaPlayer
     required property VideoOutput videoOutput
+    property color bgColor: "#87CEEB"
+
     height: menuBar.height
 
-    //File Dialog enbles to select file from local with the help of QtQick.Dialogs
+//   File Dialog enbles to select file from local with the help of QtQick.Dialogs
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
         onAccepted: {
             mediaPlayer.stop()
-            //You can pass exsiting file directory (source: "file://video.webm") instead of fileDialog.currentFile
+//         You can pass exsiting file directory (source: "file://video.webm") instead of fileDialog.currentFile
+//           mediaPlayer.source = ":/../../Downloads/test.mp4"
             mediaPlayer.source = fileDialog.currentFile
             mediaPlayer.play()
         }
     }
 
-    // Menu Bar to upload mp4 file from device
-    MenuBar {
+//      Menu Bar to upload mp4 file from device
+      FyiTest.MenuBar {
         id: menuBar
         anchors.left: parent.left
         anchors.right: parent.right
         background: Rectangle {
-            color: "#87CEEB"
+            color: bgColor
         }
-
-        Menu {
+        FyiTest.Menu {
 
             title: qsTr("&Load Vedio")
-            Action {
+            FyiTest.Action {
                 text: qsTr("&Open")
                 onTriggered: fileDialog.open()
             }

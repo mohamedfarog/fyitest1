@@ -1,13 +1,18 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
+
 
 Item {
     id: root
     required property MediaPlayer mediaPlayer
-//  mediaPlayerState is an integer value to indicate the state of the vedio while vedio moves forward and backward
     property int mediaPlayerState: mediaPlayer.playbackState
+
+
+    property int buttonHeight: 40
+    property int buttonWidth: 50
+    property color borderColor: "white"
+    property color buttonColor: "#87CEEB"
 
 
     height: frame.height
@@ -44,15 +49,13 @@ Item {
     }
 
  // Frame components (objects)
-    Frame {
+    Item  {
         id: frame
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-
-        background: Rectangle {
-            color: "#F5F5F5"
-        }
+        width: 300
+        height: 100
 
         ColumnLayout {
             id: playbackControlPanel
@@ -78,26 +81,68 @@ Item {
                     Layout.alignment: Qt.AlignCenter
                     id: controlButtons
 
-                    RoundButton {
-                        id: pauseButton
-                        radius: 50.0
-                        text: "\u2016";
-                        onClicked: mediaPlayer.pause()
-                    }
-
-                    RoundButton {
-                        id: playButton
-                        radius: 50.0
-                        text: "\u25B6";
-                        onClicked: mediaPlayer.play()
-                    }
-
-                    RoundButton {
+                    Rectangle {
                         id: stopButton
-                        radius: 50.0
-                        text: "\u25A0";
-                        onClicked: mediaPlayer.stop()
+                        radius: 50
+                        smooth: true
+                        border{color: "red"; width: 3}
+                        width: buttonWidth; height: buttonHeight
+
+                        Text{
+                            id: buttonLabel2
+                            anchors.centerIn: parent
+                            text: "Stop"
+                        }
+                        MouseArea{
+                            id: buttonMouseArea2
+                            anchors.fill: parent    //stretch the area to the parent's dimension
+                            onClicked:  mediaPlayer.stop()
+                            hoverEnabled: true
+                        }
+                        color: buttonMouseArea.pressed ? Qt.darker(buttonColor, 1.5) : buttonColor
                     }
+                    Rectangle {
+                        id: pauseButton
+                        radius: 50
+                        smooth: true
+                        border{color: "orange"; width: 3}
+                        width: buttonWidth; height: buttonHeight
+
+                        Text{
+                            id: buttonLabel1
+                            anchors.centerIn: parent
+                            text: "Pause"
+                        }
+                        MouseArea{
+                            id: buttonMouseArea1
+                            anchors.fill: parent
+                            onClicked:  mediaPlayer.pause()
+                            hoverEnabled: true
+                        }
+                        color: buttonMouseArea.pressed ? Qt.darker(buttonColor, 1.5) : buttonColor
+                    }
+
+                    Rectangle {
+                        id: playButton
+                        radius: 50
+                        smooth: true
+                        border{color: "green"; width: 3}
+                        width: buttonWidth; height: buttonHeight
+
+                        Text{
+                            id: buttonLabel
+                            anchors.centerIn: parent
+                            text: "Play"
+                        }
+                        MouseArea{
+                            id: buttonMouseArea
+                            anchors.fill: parent    //stretch the area to the parent's dimension
+                            onClicked:  mediaPlayer.play()
+                            hoverEnabled: true
+                        }
+                        color: buttonMouseArea.pressed ? Qt.darker(buttonColor, 1.5) : buttonColor
+                    }
+
                 }
 
                 Item {

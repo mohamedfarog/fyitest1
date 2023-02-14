@@ -1,7 +1,8 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
+import QtQuick.Controls.Material  as FyiTestSlider
+
 
 Item {
     id: root
@@ -25,7 +26,8 @@ Item {
                 return `${m}:${ms.padStart(4, 0)}`
             }
         }
-        Slider {
+
+        FyiTestSlider.Slider {
             id: mediaSlider
             Layout.fillWidth: true
             enabled: mediaPlayer.seekable
